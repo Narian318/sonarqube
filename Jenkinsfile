@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage("SCM"){
             steps{
-                git 'https://github.com/cloudtechmasters/sonarqube.git'
+                git 'https://github.com/Narian318/sonarqube.git'
             }
         }
         stage("Build Artifact") {
@@ -16,7 +16,7 @@ pipeline{
         }
         stage("Deploy to Sonar") {
             steps{
-                withSonarQubeEnv(installationName: 'sonar-scanner', credentialsId: 'sonar-token') {
+                withSonarQubeEnv(installationName: 'sonar-8', credentialsId: 'jenkins-token') {
                     sh "${ tool ("sonar-scanner")}/sonar-scanner -Dsonar.projectKey=hellospringboot -Dsonar.projectName=hellospringboot -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=src"
                 }
             }
